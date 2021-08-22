@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- tailwind  -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1 class="text-5xl text-center mt-16"><span class="font-semibold text-purple-600">lets get some money</span>
+        </h1>
+
+    </header>
+    <main class=" w-3/4 mx-auto">
+        <!-- balance and transaction -->
+        <section class="mt-8">
+            <div class="grid grid-cols-3 gap-4 text-white">
+                <div class="bg-blue-400 p-8 rounded">
+                    <h3 class="text-2xl text-white">deposit</h3>
+                    <h3 class="text-4xl text-white">$<span id="deposittotal">20</span></h3>
+                </div>
+                <div class="bg-green-400 p-8 rounded">
+                    <h3 class="text-2xl text-white">withdraw</h3>
+                    <h3 class="text-4xl text-white">$<span id="withdrawtotal">00</span></h3>
+                </div>
+                <div class="bg-purple-400 p-8 rounded">
+                    <h3 class="text-2xl text-white">balance</h3>
+                    <h3 class="text-4xl text-white">$<span id="balancetotal">100</span></h3>
+                </div>
+            </div>
+        </section>
+        <!-- deposit and withdraw  -->
+        <section class="mt-8">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-red-100">
+                    <h3 class="text-2xl mt-6">please deposit</h3>
+                    <div>
+                        <input id="depositinput" class="border-2 block border-gray-400 rounded w-3/4 mb-4 px-2"
+                            type="text" placeholder="amount deposit">
+                        <button id="depositbtn" class="bg-yellow-600 px-4 rounded py-2 font-medium">deposit</button>
+                    </div>
+                </div>
+                <div class="bg-purple-100">
+                    <h3 class="text-2xl mt-6">please withdraw</h3>
+                    <div>
+                        <input id="withdrawinput" class="border-2 block border-gray-400 rounded w-3/4 mb-4 px-2"
+                            type="text" placeholder="amount withdraw">
+                        <button id="withdrawbtn" class="bg-yellow-600 px-4 rounded py-2 font-medium">withdraw</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <script>
+        // deposit
+        document.getElementById('depositbtn').addEventListener('click', function () {
+            const deposit_input = document.getElementById('depositinput');
+            // console.log(deposit_total);
+            const deposit_input_value = deposit_input.value; //input er ta value
+            // console.log(deposit_total_value);
+            const deposit_total = document.getElementById('deposittotal');
+            // console.log(deposit_total);
+            const deposit_total_value = deposit_total.innerText; //deposit er main value
+            // console.log(deposit_total_value);
+            const total_deposit = parseFloat(deposit_total_value) + parseFloat(deposit_input_value);
+            // console.log(total_deposit);
+            deposit_total.innerText = total_deposit;
+            // clear 
+            deposit_input.value = '';
+            // deposit add with balance 
+            const balance_total = document.getElementById('balancetotal');
+            balance_total.innerText = parseFloat(deposit_input_value) + parseFloat(balance_total.innerText);
+        });
+        // withdraw
+        document.getElementById('withdrawbtn').addEventListener('click', function () {
+            const withdraw_input = document.getElementById('withdrawinput');
+            const withdraw_input_value = withdraw_input.value;
+            // console.log(withdraw_input_value);
+            const withdraw_total = document.getElementById('withdrawtotal');
+            // console.log(withdraw_total);
+            const withdraw_total_value = withdraw_total.innerText;
+            // console.log(withdraw_total_value);
+            const total_withdraw = parseFloat(withdraw_input_value) + parseFloat(withdraw_total_value);
+            withdraw_total.innerText = total_withdraw;
+            // clear 
+            withdraw_input.value = '';
+            // balance er sathe minus 
+            const balance_total = document.getElementById('balancetotal');
+            const total_balance = parseFloat(balance_total.innerText) - parseFloat(withdraw_input_value);
+            balance_total.innerText = total_balance;
+        })
+
+    </script>
+</body>
+
+</html>
